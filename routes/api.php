@@ -23,3 +23,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 });
 
 Route::post('/logincheck', 'APIController@login');
+Route::get('/getVisit/{id}', 'APIController@getAllVisit');
+Route::get('/getUser/{email}', 'APIController@getUser');
+Route::post('/saveVisit', 'APIController@saveVisit');

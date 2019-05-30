@@ -38,4 +38,50 @@ class APIController extends Controller
         }
     }
 
+    public function getAllVisit($id)
+    {
+
+        $child = DB::table('visitsite')
+            ->where('salesperson_id', $id)
+            ->get();
+
+        return json_encode($child);
+    }
+
+    public function getUser($email)
+    {
+
+        $child = DB::table('users')
+            ->where('email', $email)
+            ->first();
+
+        return json_encode($child);
+    }
+
+
+    public function saveVisit(Request $request)
+    {
+
+        $data = array();
+        $data['site_id'] = $request->site_name;
+        $data['salesperson_id'] = $request->salesperson;
+        $data['product_id'] = $request->product;
+        $data['location'] = $request->location;
+        $data['target'] = $request->target;
+        $data['targetmeet'] = $request->targetmeet;
+        $dt = new DateTime('now', new DateTimezone('Asia/Dhaka'));
+        $time = $dt->format("Y-m-d h:i:s");
+        $data['created_at'] = $time;
+        $data['updated_at'] = $time;
+
+        $insert = DB::table('savevisit')->insert($data);
+
+        if ($insert) {
+            $status['status'] = "Add Successfully!!";
+            return json_encode($status);
+        } else {
+            $status['status'] = "Somthing Went Wrong!!";
+            return json_encode($status);
+        }
+    }
 }
