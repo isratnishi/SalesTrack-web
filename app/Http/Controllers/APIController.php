@@ -63,9 +63,9 @@ class APIController extends Controller
     {
 
         $data = array();
-        $data['site_id'] = $request->site_name;
-        $data['salesperson_id'] = $request->salesperson;
-        $data['product_id'] = $request->product;
+        $data['site_id'] = $request->site_id;
+        $data['salesperson_id'] = $request->salesperson_id;
+        $data['product_id'] = $request->product_id;
         $data['location'] = $request->location;
         $data['target'] = $request->target;
         $data['targetmeet'] = $request->targetmeet;
@@ -83,5 +83,55 @@ class APIController extends Controller
             $status['status'] = "Somthing Went Wrong!!";
             return json_encode($status);
         }
+    }
+
+    public function getAllSaleVisit($id)
+    {
+
+        $child = DB::table('savevisit')
+            ->where('salesperson_id', $id)
+            ->get();
+
+        return json_encode($child);
+    }
+
+    public function deleteSaleVisit($id)
+    {
+
+        $child = DB::table('visitsite')
+            ->where('id', $id)
+            ->delete();
+
+        return json_encode($child);
+    }
+
+    public function getSiteName($id)
+    {
+
+        $child = DB::table('site')
+            ->where('id', $id)
+            ->first();
+
+        return json_encode($child);
+    }
+
+    public function getProductName($id)
+    {
+
+        $child = DB::table('product')
+            ->where('id', $id)
+            ->first();
+
+        return json_encode($child);
+    }
+
+    public function deleteSale($id)
+    {
+
+        $child = DB::table('savevisit')
+            ->where('id', $id)
+            ->delete();
+
+        return json_encode($child);
     }
 }

@@ -26,3 +26,10 @@ Route::post('/logincheck', 'APIController@login');
 Route::get('/getVisit/{id}', 'APIController@getAllVisit');
 Route::get('/getUser/{email}', 'APIController@getUser');
 Route::post('/saveVisit', 'APIController@saveVisit');
+
+Route::get('/getSaleVisit/{id}', 'APIController@getAllSaleVisit');
+Route::post('/deleteSaleVisit/{id}', 'APIController@deleteSaleVisit');
+Route::get('/getSiteName/{id}', 'APIController@getSiteName');
+Route::get('/getProductName/{id}', 'APIController@getProductName');
+
+Route::post('/deleteSale/{id}', 'APIController@deleteSale');
