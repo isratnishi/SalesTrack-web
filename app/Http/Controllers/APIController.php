@@ -43,11 +43,13 @@ class APIController extends Controller
 
         $child = DB::table('visitsite')
             ->where('salesperson_id', $id)
+            ->join('site', 'visitsite.site_id', '=', 'site.id')
+            ->join('users', 'visitsite.salesperson_id', '=', 'users.id')
+            ->join('product', 'visitsite.product_id', '=', 'product.id')
             ->get();
 
         return json_encode($child);
     }
-
     public function getUser($email)
     {
 
@@ -90,6 +92,9 @@ class APIController extends Controller
 
         $child = DB::table('savevisit')
             ->where('salesperson_id', $id)
+            ->join('site', 'savevisit.site_id', '=', 'site.id')
+            ->join('users', 'savevisit.salesperson_id', '=', 'users.id')
+            ->join('product', 'savevisit.product_id', '=', 'product.id')
             ->get();
 
         return json_encode($child);

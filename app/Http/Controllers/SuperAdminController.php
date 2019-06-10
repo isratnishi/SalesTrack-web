@@ -291,4 +291,24 @@ class SuperAdminController extends BaseController
         Session::put('message', 'Added Successfully!!');
         return Redirect::to('/addUser');
     }
+
+
+    public function allVisit()
+    {
+        $site = DB::table('site')->get();
+        $salespersonid = DB::table('users')->get();
+        $productid = DB::table('product')->get();
+        $visitsite = DB::table('savevisit')
+            ->join('site', 'savevisit.site_id', '=', 'site.id')
+            ->join('users', 'savevisit.salesperson_id', '=', 'users.id')
+            ->join('product', 'savevisit.product_id', '=', 'product.id')
+            ->get();
+
+        $dashboard_content = view('pages.visit_details')
+            ->with('all_site_info', $site)
+            ->with('all_salesperson_info', $salespersonid)
+            ->with('all_product_info', $productid)
+            ->with('all_visitsite_info', $visitsite);
+        return view('admin_master')->with('admin_content', $dashboard_content);
+    }
 }

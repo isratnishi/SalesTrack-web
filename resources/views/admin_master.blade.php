@@ -148,6 +148,12 @@
                 <span> Sales Entry </span>
             </a>
         </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="{{URL::to('/allVisit')}}">
+                <i class="fas fa-cart-plus"></i>
+                <span> Sales Details </span>
+            </a>
+        </li>
 
 
     </ul>

@@ -38,3 +38,4 @@ Route::get('/addVisitSite', 'SuperAdminController@addVisitSite');
 Route::post('/saveVisitSite', 'SuperAdminController@saveVisitSite');
 Route::get('/addUser', 'SuperAdminController@addUser');
 Route::post('/saveUser', 'SuperAdminController@saveUser');
+Route::get('/allVisit', 'SuperAdminController@allVisit');
