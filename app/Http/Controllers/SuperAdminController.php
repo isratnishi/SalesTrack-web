@@ -311,4 +311,89 @@ class SuperAdminController extends BaseController
             ->with('all_visitsite_info', $visitsite);
         return view('admin_master')->with('admin_content', $dashboard_content);
     }
+
+    public function heirarchy()
+    {
+        $addcategory = DB::table('caterogy')->get();
+        $dashboard_content = view('pages.heirarchy')
+            ->with('all_category_info', $addcategory)
+            ->with('all_category_info1', $addcategory);
+        return view('admin_master')->with('admin_content', $dashboard_content);
+    }
+
+
+    /**
+     *
+     */
+    public function addCategory()
+    {
+        $genTreeData = $this->generateTree(1, 'Root');
+        $json = '[{"name": "Root","parent": "","children": [' . $genTreeData . ']}]';
+        return $json;
+    }
+
+    public function saveCategory(Request $request)
+    {
+        $data = array();
+        $data['addcategory_name'] = $request->name;
+        $data['parent_id'] = $request->parent;
+        $dt = new DateTime('now', new DateTimezone('Asia/Dhaka'));
+        $time = $dt->format("Y-m-d h:i:s");
+        $data['created_at'] = $time;
+        $data['updated_at'] = $time;
+
+        DB::table('caterogy')->insert($data);
+
+        Session::put('message', 'add category Successfully!!');
+        return Redirect::to('/heirarchy');
+    }
+
+
+    public function manageCategory()
+    {
+        $categories = Category::where('parent_id', '=', 0)->get();
+        $allCategories = Category::pluck('title', 'id')->all();
+
+
+        return view('categoryTreeview', compact('categories', 'allCategories'));
+    }
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addCategory1(Request $request)
+    {
+        $this->validate($request, [
+            'title' => 'required',
+        ]);
+        $input = $request->all();
+        $input['parent_id'] = empty($input['parent_id']) ? 0 : $input['parent_id'];
+
+        Category::create($input);
+        return back()->with('success', 'New Category added successfully.');
+    }
+
+
+    private function generateTree($parrentID, $parrentName)
+    {
+        $data = null;
+
+
+        $tmChilds = DB::table('caterogy')->where('parent_id', $parrentID)->get();
+
+        foreach ($tmChilds as $child) {
+            $temp2 = $this->generateTree($child->id, $child->addcategory_name);
+            if ($data != null) $data .= ',';
+            //echo $child->addcategory_name . "<br>";
+            $data .= '{"name": "' . $child->addcategory_name . '","parent": "' . $parrentName . '","children": [' . $temp2 . ']}';
+        }
+
+        //'{"name": "Level 2: A","parent": "Top Level","children": []}';
+
+        return $data;
+    }
+
 }

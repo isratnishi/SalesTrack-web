@@ -39,3 +39,8 @@ Route::post('/saveVisitSite', 'SuperAdminController@saveVisitSite');
 Route::get('/addUser', 'SuperAdminController@addUser');
 Route::post('/saveUser', 'SuperAdminController@saveUser');
 Route::get('/allVisit', 'SuperAdminController@allVisit');
+Route::get('/heirarchy', 'SuperAdminController@heirarchy');
+Route::get('/addCategory', 'SuperAdminController@addCategory');
+Route::post('/saveCategory', 'SuperAdminController@saveCategory');
+Route::get('category-tree-view', ['uses' => 'SuperAdminController@manageCategory']);
+Route::post('add-category', ['as' => 'add.category', 'uses' => 'SuperAdminController@addCategory1']);

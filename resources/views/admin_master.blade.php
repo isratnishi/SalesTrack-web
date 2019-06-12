@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <title>Sales Track Admin - Dashboard</title>
 
     <!-- Bootstrap core CSS-->
@@ -154,6 +154,12 @@
                 <span> Sales Details </span>
             </a>
         </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="{{URL::to('/heirarchy')}}">
+                <i class="fas fa-cart-plus"></i>
+                <span> Tree  </span>
+            </a>
+        </li>
 
 
     </ul>
@@ -216,7 +222,10 @@
             return false;
         }
     }
+
+
 </script>
+@yield('OuterJSInclude')
 
 </body>
 
