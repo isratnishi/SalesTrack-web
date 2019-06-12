@@ -59,52 +59,124 @@
         <div class=" container-fluid">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-8 log">
-                        <h1 class="text-uppercase text-primary text-center">Add Category</h1>
-                        <form method="post" action="{{url('/saveCategory')}}">
-                            {{ csrf_field() }}
-                            <div class="form-group">
-                                <label for="name" class="col-sm-4 control-label">
-                                    <b> Category Name </b>
-                                </label>
-                                <div class="col-sm-8">
-                                    <input required type="text" class="form-control" id="name" name="name"
-                                           placeholder="Type Name">
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">
-                                        <b> Parent </b>
-                                    </label>
-                                    <div class="col-sm-10">
-                                        <select id="parent" name="parent" class="form-control">
-                                            <option value="">Select any one</option>
-                                            <?php
+                    <div class="col-sm-6 log">
+                        <div class="card mb-3">
+                            <div class="card-header">
 
-                                            foreach ($all_category_info as $category) {
-                                            ?>
-                                            <option value="<?php echo $category->id ?>">
-                                                <?php echo $category->addcategory_name ?>
-                                            </option>
-                                            <?php }
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div>
+                                <h1 class="text-uppercase text-primary text-center">Add Category</h1>
+                            </div>
+                            <div class="card-body">
+                                <div class="col-sm-12 log">
 
-                                <div class="col-sm-4">
-                                    <button type="submit" class="form-control btn btn-danger">Submit</button>
+                                    <form method="post" action="{{url('/saveCategory')}}">
+                                        {{ csrf_field() }}
+                                        <div class="form-group">
+                                            <label for="name" class="col-sm-4 control-label">
+                                                <b> Category Name </b>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <input required type="text" class="form-control" id="name" name="name"
+                                                       placeholder="Type Name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">
+                                                    <b> Parent </b>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <select id="parent" name="parent" class="form-control">
+                                                        <option value="">Select any one</option>
+                                                        <?php
+
+                                                        foreach ($all_category_info as $category) {
+                                                        ?>
+                                                        <option value="<?php echo $category->id ?>">
+                                                            <?php echo $category->addcategory_name ?>
+                                                        </option>
+                                                        <?php }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4">
+                                                <button type="submit" class="form-control btn btn-danger">Submit
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </form>
                                 </div>
                             </div>
-
-                        </form>
+                        </div>
                     </div>
+                    <div class="col-sm-6 log">
+                        <div class="card mb-3">
+                            <div class="card-header">
+
+                                <h1 class="text-uppercase text-primary text-center">Edit Category</h1>
+                            </div>
+                            <div class="card-body">
+                                <div class="col-sm-12 log">
+
+                                    <form method="post" action="{{url('/editCategory')}}">
+                                        {{ csrf_field() }}
+                                        <div class="form-group">
+                                            <label for="name" class="col-sm-4 control-label">
+                                                <b> Category Name </b>
+                                            </label>
+                                            <div class="col-sm-8">
+
+
+                                                <select id="name" name="name" class="form-control">
+                                                    <option value="">Select any one</option>
+                                                    <?php
+
+                                                    foreach ($all_category_info as $category) {
+                                                    ?>
+                                                    <option value="<?php echo $category->id ?>">
+                                                        <?php echo $category->addcategory_name ?>
+                                                    </option>
+                                                    <?php }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">
+                                                    <b> Parent </b>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <select id="parent" name="parent" class="form-control">
+                                                        <option value="">Select any one</option>
+                                                        <?php
+
+                                                        foreach ($all_category_info as $category) {
+                                                        ?>
+                                                        <option value="<?php echo $category->id ?>">
+                                                            <?php echo $category->addcategory_name ?>
+                                                        </option>
+                                                        <?php }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4">
+                                                <button type="submit" class="form-control btn btn-danger">Submit
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
         </div>
     </div>
-
-    <!-- Sticky Footer -->
 
 @endsection
 
@@ -121,7 +193,7 @@
                 type: "GET",
                 success: function (msg) {
                     treeData = msg;
-                    var margin = {top: 0, right: 120, bottom: 20, left: 120},
+                    var margin = {top: 50, right: 120, bottom: 20, left: 120},
                         width = 960 - margin.right - margin.left,
                         height = 500 - margin.top - margin.bottom;
 
@@ -134,7 +206,7 @@
 
                     var diagonal = d3.svg.diagonal()
                         .projection(function (d) {
-                            return [d.y, d.x];
+                            return [d.x, d.y];
                         });
 
                     var svg = d3.select("body").append("svg")
@@ -159,7 +231,7 @@
 
                         // Normalize for fixed-depth.
                         nodes.forEach(function (d) {
-                            d.y = d.depth * 180;
+                            d.y = d.depth * 100;
                         });
 
                         // Update the nodes…
@@ -172,7 +244,7 @@
                         var nodeEnter = node.enter().append("g")
                             .attr("class", "node")
                             .attr("transform", function (d) {
-                                return "translate(" + source.y0 + "," + source.x0 + ")";
+                                return "translate(" + d.x + "," + d.y + ")";
                             })
                             .on("click", click);
 
@@ -183,7 +255,7 @@
                             });
 
                         nodeEnter.append("text")
-                            .attr("x", function (d) {
+                            .attr("y", function (d) {
                                 return d.children || d._children ? -13 : 13;
                             })
                             .attr("dy", ".35em")
@@ -199,7 +271,7 @@
                         var nodeUpdate = node.transition()
                             .duration(duration)
                             .attr("transform", function (d) {
-                                return "translate(" + d.y + "," + d.x + ")";
+                                return "translate(" + d.x + "," + d.y + ")";
                             });
 
                         nodeUpdate.select("circle")
@@ -215,7 +287,7 @@
                         var nodeExit = node.exit().transition()
                             .duration(duration)
                             .attr("transform", function (d) {
-                                return "translate(" + source.y + "," + source.x + ")";
+                                return "translate(" + d.x + "," + d.y + ")";
                             })
                             .remove();
 

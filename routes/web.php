@@ -44,3 +44,6 @@ Route::get('/addCategory', 'SuperAdminController@addCategory');
 Route::post('/saveCategory', 'SuperAdminController@saveCategory');
 Route::get('category-tree-view', ['uses' => 'SuperAdminController@manageCategory']);
 Route::post('add-category', ['as' => 'add.category', 'uses' => 'SuperAdminController@addCategory1']);
+
+
+Route::post('/editCategory', 'SuperAdminController@editCategory');

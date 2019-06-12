@@ -315,6 +315,7 @@ class SuperAdminController extends BaseController
     public function heirarchy()
     {
         $addcategory = DB::table('caterogy')->get();
+        //$parent=DB::table('caterogy')->where('to_be_used_by_user_id', '!=' , 2)->get();
         $dashboard_content = view('pages.heirarchy')
             ->with('all_category_info', $addcategory)
             ->with('all_category_info1', $addcategory);
@@ -345,6 +346,24 @@ class SuperAdminController extends BaseController
         DB::table('caterogy')->insert($data);
 
         Session::put('message', 'add category Successfully!!');
+        return Redirect::to('/heirarchy');
+    }
+
+    public function editCategory(Request $request)
+    {
+        $data = array();
+        $data['id'] = $request->name;
+        $data['parent_id'] = $request->parent;
+        $id = $request->name;
+        $dt = new DateTime('now', new DateTimezone('Asia/Dhaka'));
+        $time = $dt->format("Y-m-d h:i:s");
+        $data['created_at'] = $time;
+        $data['updated_at'] = $time;
+
+        DB::table('caterogy')
+            ->where('id', $id)
+            ->update($data);
+        Session::put('message', 'Edit category Successfully!!');
         return Redirect::to('/heirarchy');
     }
 
