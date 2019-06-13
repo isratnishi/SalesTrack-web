@@ -330,6 +330,8 @@
                             d.x0 = d.x;
                             d.y0 = d.y;
                         });
+
+                        nodes.onclick("click", onUpdate(d))
                     }
 
                     // Toggle children on click.
