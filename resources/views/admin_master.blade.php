@@ -160,6 +160,12 @@
                 <span> Tree  </span>
             </a>
         </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="{{URL::to('/tree')}}">
+                <i class="fas fa-cart-plus"></i>
+                <span> Tree example  </span>
+            </a>
+        </li>
 
 
     </ul>

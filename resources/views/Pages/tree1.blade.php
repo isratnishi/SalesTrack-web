@@ -81,13 +81,11 @@
                     // Misc. variables
                     var i = 0;
                     var duration = 750;
-                    var root = msg;
+                    var root;
 
                     // size of the diagram
-
-                    var margin = {top: 50, right: 120, bottom: 20, left: 120},
-                        viewerWidth = 960 - margin.right - margin.left,
-                        viewerHeight = 500 - margin.top - margin.bottom;
+                    var viewerWidth = $(document).width();
+                    var viewerHeight = $(document).height();
 
                     var tree = d3.layout.tree()
                         .size([viewerHeight, viewerWidth]);

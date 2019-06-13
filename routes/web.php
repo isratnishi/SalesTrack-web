@@ -47,3 +47,6 @@ Route::post('add-category', ['as' => 'add.category', 'uses' => 'SuperAdminContro
 
 
 Route::post('/editCategory', 'SuperAdminController@editCategory');
+
+
+Route::get('/tree', 'SuperAdminController@tree');

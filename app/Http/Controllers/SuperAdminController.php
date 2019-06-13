@@ -322,6 +322,16 @@ class SuperAdminController extends BaseController
         return view('admin_master')->with('admin_content', $dashboard_content);
     }
 
+    public function tree()
+    {
+        $addcategory = DB::table('caterogy')->get();
+        //$parent=DB::table('caterogy')->where('to_be_used_by_user_id', '!=' , 2)->get();
+        $dashboard_content = view('pages.tree')
+            ->with('all_category_info', $addcategory)
+            ->with('all_category_info1', $addcategory);
+        return view('admin_master')->with('admin_content', $dashboard_content);
+    }
+
 
     /**
      *
@@ -329,7 +339,7 @@ class SuperAdminController extends BaseController
     public function addCategory()
     {
         $genTreeData = $this->generateTree(1, 'Root');
-        $json = '[{"name": "Root","parent": "","children": [' . $genTreeData . ']}]';
+        $json = '{"name": "Root","size": "","children": [' . $genTreeData . ']}';
         return $json;
     }
 
@@ -407,7 +417,7 @@ class SuperAdminController extends BaseController
             $temp2 = $this->generateTree($child->id, $child->addcategory_name);
             if ($data != null) $data .= ',';
             //echo $child->addcategory_name . "<br>";
-            $data .= '{"name": "' . $child->addcategory_name . '","parent": "' . $parrentName . '","children": [' . $temp2 . ']}';
+            $data .= '{"name": "' . $child->addcategory_name . '","size": "' . $parrentID . '","children": [' . $temp2 . ']}';
         }
 
         //'{"name": "Level 2: A","parent": "Top Level","children": []}';
