@@ -341,6 +341,7 @@ class SuperAdminController extends BaseController
         $genTreeData = $this->generateTree(1, 'Root');
         $json = '{"name": "Root","size": "","children": [' . $genTreeData . ']}';
         return $json;
+        // var_dump(json_encode([$json], JSON_NUMERIC_CHECK));
     }
 
     public function saveCategory(Request $request)
@@ -417,7 +418,7 @@ class SuperAdminController extends BaseController
             $temp2 = $this->generateTree($child->id, $child->addcategory_name);
             if ($data != null) $data .= ',';
             //echo $child->addcategory_name . "<br>";
-            $data .= '{"name": "' . $child->addcategory_name . '","size": "' . $parrentID . '","children": [' . $temp2 . ']}';
+            $data .= '{"name": "' . $child->addcategory_name . '","parent":" ' . $parrentName . '","children": [' . $temp2 . ']}';
         }
 
         //'{"name": "Level 2: A","parent": "Top Level","children": []}';
