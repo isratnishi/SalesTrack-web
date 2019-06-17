@@ -40,6 +40,7 @@ Route::get('/addUser', 'SuperAdminController@addUser');
 Route::post('/saveUser', 'SuperAdminController@saveUser');
 Route::get('/allVisit', 'SuperAdminController@allVisit');
 Route::get('/heirarchy', 'SuperAdminController@heirarchy');
+Route::get('/treeview', 'SuperAdminController@treeview');
 Route::get('/addCategory', 'SuperAdminController@addCategory');
 Route::post('/saveCategory', 'SuperAdminController@saveCategory');
 Route::get('category-tree-view', ['uses' => 'SuperAdminController@manageCategory']);

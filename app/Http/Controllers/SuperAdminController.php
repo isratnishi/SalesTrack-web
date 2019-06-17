@@ -322,6 +322,16 @@ class SuperAdminController extends BaseController
         return view('admin_master')->with('admin_content', $dashboard_content);
     }
 
+    public function treeview()
+    {
+        $addcategory = DB::table('caterogy')->get();
+        //$parent=DB::table('caterogy')->where('to_be_used_by_user_id', '!=' , 2)->get();
+        $dashboard_content = view('pages.treeview')
+            ->with('all_category_info', $addcategory)
+            ->with('all_category_info1', $addcategory);
+        return view('admin_master')->with('admin_content', $dashboard_content);
+    }
+
 
     /**
      *

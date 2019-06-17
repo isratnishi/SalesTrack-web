@@ -22,7 +22,12 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('admin_assets/css/sb-admin.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('admin_assets/css/foundation.css')}}"/>
+    <link rel="stylesheet" href="{{asset('admin_assets/css/app.css')}}"/>
+    <link rel="stylesheet" href="{{asset('admin_assets/css/d3-context-menu.css')}}"/>
 
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+          rel="stylesheet">
 </head>
 <style>
     .card {
@@ -160,6 +165,12 @@
                 <span> Tree  </span>
             </a>
         </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="{{URL::to('/treeview')}}">
+                <i class="fas fa-cart-plus"></i>
+                <span> Tree View </span>
+            </a>
+        </li>
 
 
     </ul>
@@ -213,6 +224,7 @@
 
 <!-- Demo scripts for this page-->
 <script src="{{asset('admin_assets/js/demo/datatables-demo.js')}}"></script>
+<script src="{{asset('admin_assets/js/d3-context-menu.js')}}"></script>
 <script type="text/javascript">
     function checkDelete() {
         chk = confirm('Are You Sure To Do This.?');
